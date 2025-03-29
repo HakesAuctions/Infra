@@ -1,0 +1,15 @@
+repos:
+- repo: https://github.com/antonbabenko/pre-commit-terraform
+  rev: v1.97.4
+  hooks:
+    - id: terraform_fmt
+    - id: terraform_tflint
+    # - id: terraform_checkov
+    #   name: Terraform security with Checkov
+    #   args:
+    #     - --env-vars=CKV_IGNORE_HIDDEN_DIRECTORIES=false
+    #     - --args=--quiet
+    #     - --args=--framework=terraform
+    #     - --args=--skip-check CKV_TF_1
+    #     - --args=--download-external-modules true
+    #     - --args=--external-modules-download-path .terraform/checkov

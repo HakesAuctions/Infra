@@ -1,0 +1,1 @@
+diff <(sort -u <(for host in $(cat alldomains.txt); do dig +nottlid +noall +answer @mail3.diamondcomics.com $host ANY; done) ) <(sort -u <(for host in $(cat alldomains.txt); do dig +nottlid +noall +answer @ns-1716.awsdns-22.co.uk $host ANY; done) )

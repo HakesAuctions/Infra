@@ -1,0 +1,77 @@
+$TTL 360
+
+@                                      IN      SOA     mail2.diamondcomics.com.  postmaster.diamondcomics.com. (
+                                                2024100101      ; serial
+                                                7200            ; refresh every 2 hours
+                                                3600            ; retry every hour
+                                                604800          ; expire every 7 days
+                                                43200           ; minimum 12 hours
+                                                )
+
+@                                       IN      NS      mail3.diamondcomics.com.
+@                                       IN      NS      mail2.diamondcomics.com.
+
+@                                       IN      A       207.114.32.28
+www                                     IN      A       207.114.32.28
+emailer                                 IN      A       207.114.32.104
+auctions                                IN      CNAME   hosted-content.aweber.com.
+consignment                             IN      CNAME   hosted-content.aweber.com.
+
+@                                       IN      MX      0       hakes-com.mail.protection.outlook.com.
+
+
+
+
+; Microsoft 365 Support
+@                                       IN      TXT     "MS=ms77900974"
+
+; Google Verification
+@                                       IN      TXT     "google-site-verification=q6MCW1272pO26jA_tqDZLmPbWTv3_AYbuajvWgi-mp0"
+
+; Knowbe4 Verification
+@                                       IN      TXT     "knowbe4-site-verification=4a20325f993d226467366bab06c122e3"
+
+; SPF Record
+@                                       IN      TXT     "v=spf1 ip4:207.114.32.0/24 ip4:207.114.33.0/24 include:spf.protection.outlook.com include:send.aweber.com ~all"
+
+; --- DomainKey policy for hakes.com
+_domainkey                              IN      TXT     "o=~; r=admin@diamondcomics.com"
+; --- ADSP policy for diamondcomics.com
+_adsp._domainkey                        IN      TXT     "dkim=unknown"
+; -- DomainKey selector default for hakes.com
+default._domainkey                      IN      TXT     "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDH9mBJridGUuTexzFfNYI2frIpV7oib7axdaThpqRWPZpDQlbAeYn5Y5G67bIBaLX6WsHVQvIqUt1bLE8/uPQj/uUuSdc8zt1iZPB6ZOZxpiTZ3tDVE7PH/+FmDx07zCaZ2Zblx4VQwewcTZxzl/uR49asQWVCQ0uwvG3RJTLvBQIDAQAB"
+
+; Add DK for dynect.net
+190981_606546541d3e032eff1915b7349a0b92._domainkey      IN      TXT     "v=DKIM1; k=rsa; t=y; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIPljCW9YZhomHSVtLDvm2vAfE8Ctha0GQxD8NYj1G3VPXAL9ajhQGiABV/8MQ3SgkC1b319PiKrRvvKoyXfKCjhheklZk8dmRSDi/nH5oKnzfi3TpXv/pgA+n4xcH8/dUDtdWRQFPGCz0ztyXSCPUc1A4+YasP6eaD3fZqo0uiQIDAQAB;"
+
+; Aweber DMARC
+_dmarc                                  IN      TXT     "v=DMARC1; p=none; pct=100; rua=mailto:dmarc@fbl.optin.com"
+
+
+
+
+
+; Domain Control  CNAME
+_7484FF77CD04CBFB3EA30F088E6DBE04       IN      CNAME   C7971662B49F45088A64082CAD9A2C2D.189F84997D9058E2B7F83113ABA9FE3F.5daf3c42d7926.comodoca.com.
+
+; Sendgrid CNAME
+em1                                     IN      CNAME   u3017607.wl108.sendgrid.net.
+s1._domainkey                           IN      CNAME   s1.domainkey.u3017607.wl108.sendgrid.net.
+s2._domainkey                           IN      CNAME   s2.domainkey.u3017607.wl108.sendgrid.net.
+
+; aWeber email CNAME
+aweber_key_a._domainkey                 IN      CNAME   aweber_key_a.send.aweber.com.
+aweber_key_b._domainkey                 IN      CNAME   aweber_key_b.send.aweber.com.
+aweber_key_c._domainkey                 IN      CNAME   aweber_key_c.send.aweber.com.
+
+
+; Lync Online and CNAME and Skype
+sip                                     IN      CNAME   sipdir.online.lync.com.
+lyncdiscover                            IN      CNAME   webdir.online.lync.com.
+autodiscover                            IN      CNAME   autodiscover.outlook.com.
+msoid                                   IN      CNAME   clientconfig.microsoftonline-p.net.
+enterpriseregistration                  IN      CNAME   enterpriseregistration.windows.net.
+enterpriseenrollment                    IN      CNAME   enterpriseenrollment.manage.microsoft.com.
+
+_sip._tls                               IN      SRV     100 1 443       sipdir.online.lync.com.
+_sipfederationtls._tcp                  IN      SRV     100 1 5061      sipfed.online.lync.com.
