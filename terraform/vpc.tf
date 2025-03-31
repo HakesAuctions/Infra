@@ -21,9 +21,9 @@ module "dynamic_subnets" {
   stage     = terraform.workspace
   name      = "app"
   availability_zones = [
-    "${data.aws_region.current.name}a",
-    "${data.aws_region.current.name}b",
-    #"${data.aws_region.current.name}c",
+    # We need to use regions C & D since A & B are at capacity
+    "${data.aws_region.current.name}c",
+    "${data.aws_region.current.name}d",
   ]
   vpc_id          = module.vpc.vpc_id
   igw_id          = [module.vpc.igw_id]

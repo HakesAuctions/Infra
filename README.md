@@ -14,6 +14,9 @@ This repo holds the IaC for Hakes aws account ()
 * billing
 * readonly
 
+# Managed Polices
+* IAM MFA
+
 # Load Balancer
 * main load balancer
 
@@ -23,9 +26,16 @@ This repo holds the IaC for Hakes aws account ()
 
 # SQLServer
 * Main SQL Server
+  * HakesAppDB
+  * NewsManagerDB
 
 # Security Group
 * Whitelist Office
 
 # Route53
 * hakes.com
+
+# Alerts
+* ec2
+* rds
+* billing
