@@ -59,15 +59,23 @@ module "sqlserver" {
   #   { name  = "sort_buffer_size"          value = "2097152" }
   # ]
 
-  # db_options = [
-  #   {
-  #     option_name = "MARIADB_AUDIT_PLUGIN"
-  #       option_settings = [
-  #         { name = "SERVER_AUDIT_EVENTS"           value = "CONNECT" },
-  #         { name = "SERVER_AUDIT_FILE_ROTATIONS"   value = "37" }
-  #       ]
-  #   }
-  # ]
+  db_options = [
+    {
+      option_name = "SQLSERVER_BACKUP_RESTORE"
+      option_settings = [
+        {
+          name  = "IAM_ROLE_ARN"
+          value = "arn:aws:iam::206417140802:role/hakes-prd-appdb-backup" #module.appdb_backup_role.arn
+        }
+      ]
+
+      # Empty vars, only added to make module work
+      db_security_group_memberships  = []
+      vpc_security_group_memberships = []
+      port                           = 0
+      version                        = ""
+    }
+  ]
 
   timeouts = {
     create = "90m"

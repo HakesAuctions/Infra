@@ -1,6 +1,6 @@
 # hakes-infra
 
-This repo holds the IaC for Hakes aws account ()
+This repo holds the IaC for Hakes aws account (206417140802)
 
 
 # Enviroments
@@ -15,7 +15,7 @@ This repo holds the IaC for Hakes aws account ()
 * readonly
 
 # Managed Polices
-* IAM MFA
+* IAM MFA (TODO)
 
 # Load Balancer
 * main load balancer
@@ -28,6 +28,7 @@ This repo holds the IaC for Hakes aws account ()
 * Main SQL Server
   * HakesAppDB
   * NewsManagerDB
+* s3 db backup bucket
 
 # Security Group
 * Whitelist Office
@@ -36,6 +37,6 @@ This repo holds the IaC for Hakes aws account ()
 * hakes.com
 
 # Alerts
-* ec2
-* rds
-* billing
+* ec2 (TODO)
+* rds (TODO)
+* billing (TODO)

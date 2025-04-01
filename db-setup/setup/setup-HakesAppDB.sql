@@ -1,5 +1,5 @@
 -- Step 1: Create the database
-CREATE DATABASE HakesAppDB;
+--CREATE DATABASE HakesAppDB;
 GO
 
 -- Step 2: Create the login for the write user

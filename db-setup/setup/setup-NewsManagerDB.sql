@@ -1,5 +1,5 @@
 -- Step 1: Create the database
-CREATE DATABASE NewsManagerDB;
+--CREATE DATABASE NewsManagerDB;
 GO
 
 -- Step 2: Create the login for the write user
