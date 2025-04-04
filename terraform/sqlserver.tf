@@ -8,21 +8,18 @@ module "sqlserver" {
 
   dns_zone_id = aws_route53_zone.hakes_com.zone_id
   host_name   = "db"
-  security_group_ids = [
-    module.app_ec2["app01"].security_group_id,
-    module.app_ec2["app02"].security_group_id,
-    module.backend_ec2["backend01"].security_group_id,
-  ]
-  # security_group_ids = [concat(
-  #   module.app_ec2[*].security_group_id,
-  #   module.backend_ec2[*].security_group_id,
-  # )]
+
+  security_group_ids = concat(
+    [for v in module.app_ec2 : v.security_group_id],
+    [for v in module.backend_ec2 : v.security_group_id]
+  )
+
   ca_cert_identifier  = "rds-ca-rsa2048-g1"
   allowed_cidr_blocks = local.whitelist_cidrs
 
-  #database_name     = "app"
+  #database_name = "app"
   database_user = "admin"
-  #database_password = module.db_admin_password.secret_string
+
   database_manage_master_user_password = true
 
   database_port     = 1433
@@ -43,7 +40,6 @@ module "sqlserver" {
 
   subnet_ids = module.dynamic_subnets.public_subnet_ids
   vpc_id     = module.vpc.vpc_id
-  #snapshot_identifier         = "rds:production-2015-06-26-06-05"
 
   auto_minor_version_upgrade  = true
   allow_major_version_upgrade = false

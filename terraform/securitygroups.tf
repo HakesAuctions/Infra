@@ -1,6 +1,9 @@
 locals {
   whitelist_cidrs = [
-    "207.55.92.250/32", # Henry Skrtich Private IP
+    "207.55.92.250/32",  # Henry Skrtich IP
+    "71.218.118.153/32", # Alex Berger IP
+    "209.197.83.205/32", # Savio Sebastian IP
+    "23.31.246.1/32",    # Hakes Office IP
   ]
 }
 
@@ -35,7 +38,25 @@ module "sg_whitelist" {
       protocol    = "tcp"
       cidr_blocks = local.whitelist_cidrs
       description = "Allow HTTP from inside the security group"
-    }
+    },
+    {
+      key         = "rdp-tcp"
+      type        = "ingress"
+      from_port   = 3389
+      to_port     = 3389
+      protocol    = "tcp"
+      cidr_blocks = local.whitelist_cidrs
+      description = "Allow RDP (tcp) from anywhere"
+    },
+    {
+      key         = "rdp-udp"
+      type        = "ingress"
+      from_port   = 3389
+      to_port     = 3389
+      protocol    = "udp"
+      cidr_blocks = local.whitelist_cidrs
+      description = "Allow RDP (udp) from anywhere"
+    },
   ]
 
   vpc_id = module.vpc.vpc_id

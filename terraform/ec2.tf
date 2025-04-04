@@ -34,11 +34,30 @@ module "app_ec2" {
   namespace = local.namespace
   stage     = terraform.workspace
 
-  ssh_key_pair    = aws_key_pair.this.key_name
+  ami = each.value.ami
+
+  root_volume_size = 50
+  root_volume_type = "gp3"
+  root_iops        = 3000
+  root_throughput  = 125
+
+  ssh_key_pair    = aws_key_pair.rsa.key_name
   instance_type   = each.value.instance_type
   vpc_id          = module.vpc.vpc_id
   security_groups = each.value.security_groups
   subnet          = each.value.subnet
+
+  associate_public_ip_address = true
+}
+
+resource "aws_route53_record" "app_ec2" {
+  for_each = local.app_ec2
+
+  zone_id = aws_route53_zone.hakes_com.zone_id
+  name    = each.key
+  type    = "A"
+  ttl     = 300
+  records = [module.app_ec2[each.key].public_ip]
 }
 
 resource "aws_lb_target_group_attachment" "app_ec2" {
@@ -59,9 +78,28 @@ module "backend_ec2" {
   namespace = local.namespace
   stage     = terraform.workspace
 
-  ssh_key_pair    = aws_key_pair.this.key_name
+  ami = each.value.ami
+
+  root_volume_size = 50
+  root_volume_type = "gp3"
+  root_iops        = 3000
+  root_throughput  = 125
+
+  ssh_key_pair    = aws_key_pair.rsa.key_name
   instance_type   = each.value.instance_type
   vpc_id          = module.vpc.vpc_id
   security_groups = each.value.security_groups
   subnet          = each.value.subnet
+
+  associate_public_ip_address = true
+}
+
+resource "aws_route53_record" "backend_ec2" {
+  for_each = local.backend_ec2
+
+  zone_id = aws_route53_zone.hakes_com.zone_id
+  name    = each.key
+  type    = "A"
+  ttl     = 300
+  records = [module.backend_ec2[each.key].public_ip]
 }
