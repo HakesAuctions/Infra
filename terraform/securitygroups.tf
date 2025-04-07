@@ -29,7 +29,7 @@ module "sg_whitelist" {
       to_port     = 22
       protocol    = "tcp"
       cidr_blocks = local.whitelist_cidrs
-      description = "Allow SSH from anywhere"
+      description = "Allow SSH from whitelist"
     },
     {
       key         = "HTTP"
@@ -38,7 +38,7 @@ module "sg_whitelist" {
       to_port     = 80
       protocol    = "tcp"
       cidr_blocks = local.whitelist_cidrs
-      description = "Allow HTTP from inside the security group"
+      description = "Allow HTTP from whitelist"
     },
     {
       key         = "rdp-tcp"
@@ -47,7 +47,7 @@ module "sg_whitelist" {
       to_port     = 3389
       protocol    = "tcp"
       cidr_blocks = local.whitelist_cidrs
-      description = "Allow RDP (tcp) from anywhere"
+      description = "Allow RDP (tcp) from whitelist"
     },
     {
       key         = "rdp-udp"
@@ -56,7 +56,7 @@ module "sg_whitelist" {
       to_port     = 3389
       protocol    = "udp"
       cidr_blocks = local.whitelist_cidrs
-      description = "Allow RDP (udp) from anywhere"
+      description = "Allow RDP (udp) from whitelist"
     },
   ]
 
@@ -83,7 +83,7 @@ module "sg_loadbalancer" {
       from_port   = 80
       to_port     = 80
       protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = local.whitelist_cidrs # ["0.0.0.0/0"] #TODO: Switch to allow all access before going live
       description = "Allow HTTP from anywhere"
     },
     {
@@ -92,7 +92,7 @@ module "sg_loadbalancer" {
       from_port   = 443
       to_port     = 443
       protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = local.whitelist_cidrs # ["0.0.0.0/0"] #TODO: Switch to allow all access before going live
       description = "Allow HTTPS from anywhere"
     }
   ]

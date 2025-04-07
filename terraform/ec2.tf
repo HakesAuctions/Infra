@@ -47,6 +47,31 @@ module "app_ec2" {
   security_groups = each.value.security_groups
   subnet          = each.value.subnet
 
+  security_group_rules = [
+    {
+      "cidr_blocks" : [
+        "0.0.0.0/0"
+      ],
+      "description" : "Allow all outbound traffic",
+      "from_port" : 0,
+      "protocol" : "-1",
+      "to_port" : 65535,
+      "type" : "egress"
+
+      "source_security_group_id" : null,
+    },
+    {
+      "cidr_blocks" : [],
+      "description" : "Allow access from Load Balancer",
+      "type" : "ingress",
+      "from_port" : 80,
+      "to_port" : 80,
+      "protocol" : "tcp",
+
+      "source_security_group_id" : module.alb.security_group_id
+    },
+  ]
+
   disable_api_stop        = true # Instance Stop Protection
   disable_api_termination = true # Instance Termination Protection
 
