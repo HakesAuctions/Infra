@@ -33,7 +33,7 @@ module "sqlserver" {
   engine_version       = "16.00.4175.1.v1"
   license_model        = "license-included"
 
-  instance_class     = "db.t3.xlarge" #TODO: Change to t3.xlarge before going live
+  instance_class     = "db.t3.xlarge"
   db_parameter_group = "sqlserver-se-16.0"
 
   publicly_accessible = true
@@ -49,6 +49,7 @@ module "sqlserver" {
   copy_tags_to_snapshot       = true
   backup_retention_period     = 7
   backup_window               = "00:00-04:00"
+  deletion_protection         = true
 
   # db_parameter = [
   #   { name  = "myisam_sort_buffer_size"   value = "1048576" },

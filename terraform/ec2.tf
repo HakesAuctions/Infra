@@ -7,7 +7,7 @@ locals {
       subnet          = module.dynamic_subnets.public_subnet_ids[0]
     },
     app02 = {
-      instance_type   = "t3.small"
+      instance_type   = "t3.small" #TODO: Switch to t3.xlarge before going live
       ami             = local.windows_server_ami
       security_groups = [module.sg_whitelist.id]
       subnet          = module.dynamic_subnets.public_subnet_ids[1]
@@ -46,6 +46,9 @@ module "app_ec2" {
   vpc_id          = module.vpc.vpc_id
   security_groups = each.value.security_groups
   subnet          = each.value.subnet
+
+  disable_api_stop        = true # Instance Stop Protection
+  disable_api_termination = true # Instance Termination Protection
 
   associate_public_ip_address = true
 }
@@ -90,6 +93,9 @@ module "backend_ec2" {
   vpc_id          = module.vpc.vpc_id
   security_groups = each.value.security_groups
   subnet          = each.value.subnet
+
+  disable_api_stop        = true # Instance Stop Protection
+  disable_api_termination = true # Instance Termination Protection
 
   associate_public_ip_address = true
 }

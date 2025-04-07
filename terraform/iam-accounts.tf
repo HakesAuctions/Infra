@@ -8,6 +8,25 @@ locals {
       name   = "aberger@soaringtech.com",
       groups = ["admin"],
     },
+    justin-davis = {
+      name   = "justin@soaringtech.com",
+      groups = ["admin"],
+    },
+    shawn-sippel = {
+      name = "sshawn@geppifamilyenterprises.com",
+      groups = [
+        "support",
+        "billing",
+        "readonly",
+      ],
+    }
+    savio-sebastian = {
+      name = "ssavio@diamondcomics.com",
+      groups = [
+        "support",
+        "readonly",
+      ],
+    },
   }
 }
 

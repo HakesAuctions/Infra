@@ -4,8 +4,6 @@ This repo holds the IaC for Hakes aws account (206417140802)
 
 
 # Enviroments
-* dev (not in use)
-* stg (not in use)
 * prd
 
 # Permission Sets/Groups
@@ -31,10 +29,20 @@ This repo holds the IaC for Hakes aws account (206417140802)
 * s3 db backup bucket
 
 # Security Group
-* Whitelist Office
+* EC2/RDS Whitelist
+* LB Security Group
 
 # Route53
 * hakes.com
+
+# S3
+* Terrafoirm state bucket
+* Database backup/restore bucket
+* Block Public Access
+
+# SCP
+* Region Use Limit (disabled)
+* Block disabling s3 public access (disabled)
 
 # Alerts
 * ec2 (TODO)

@@ -4,7 +4,9 @@ locals {
       "arn:aws:iam::aws:policy/AdministratorAccess",
     ],
     support = [
-      "arn:aws:iam::aws:policy/EC2InstanceConnect", //TODO: Need more policies, maybe a custom one
+      # ec2_start_stop_reboot policy is added elsewhere
+      "arn:aws:iam::aws:policy/EC2InstanceConnect",
+      "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
     ],
     billing = [
       "arn:aws:iam::aws:policy/job-function/Billing",

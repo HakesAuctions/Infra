@@ -2,7 +2,7 @@
 USE [master];
 GO
 
--- Delete existing db
+-- Delete existing db, comment if db doesnt exist
 exec msdb.dbo.rds_drop_database @db_name='NewsManagerDB';
 go
 
