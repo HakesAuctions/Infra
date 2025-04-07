@@ -11,7 +11,7 @@ ALTER ROLE db_datareader ADD MEMBER NewsManagerDBWriter;
 ALTER ROLE db_datareader ADD MEMBER NewsManagerDBReadOnly;
 GO
 
--- Step 5: Grant EXECUTE permissions
+-- Grant EXECUTE permissions
 GRANT EXECUTE ON dbo.GetArticleListForSiteMap TO NewsManagerDBWriter;
 GRANT EXECUTE ON dbo.s_ApproveAdFlags TO NewsManagerDBWriter;
 GRANT EXECUTE ON dbo.s_ApproveArticleFlags TO NewsManagerDBWriter;
@@ -283,3 +283,13 @@ GRANT EXECUTE ON dbo.stp_Spot_R TO NewsManagerDBWriter;
 GRANT EXECUTE ON dbo.usp_GetArticle TO NewsManagerDBWriter;
 GRANT EXECUTE ON dbo.usp_GetHakesArticle TO NewsManagerDBWriter;
 GO
+
+ALTER Procedure [dbo].[s_InitImageRecord]
+    @ArticleID int,
+    @ImageBinary varbinary = NULL
+AS
+BEGIN
+    INSERT INTO Images(ArticleID,ImageBinary,IsSplash)
+    VALUES (@ArticleID,@ImageBinary,0)
+    RETURN (Select @@identity as ImageID)
+END

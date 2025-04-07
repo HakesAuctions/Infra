@@ -51,10 +51,13 @@ module "sqlserver" {
   backup_window               = "00:00-04:00"
   deletion_protection         = true
 
-  # db_parameter = [
-  #   { name  = "myisam_sort_buffer_size"   value = "1048576" },
-  #   { name  = "sort_buffer_size"          value = "2097152" }
-  # ]
+  db_parameter = [
+    {
+      name         = "clr enabled"
+      value        = "1" # Enabled
+      apply_method = "immediate"
+    }
+  ]
 
   db_options = [
     {
@@ -62,7 +65,7 @@ module "sqlserver" {
       option_settings = [
         {
           name  = "IAM_ROLE_ARN"
-          value = "arn:aws:iam::206417140802:role/hakes-prd-appdb-backup" #module.appdb_backup_role.arn
+          value = "arn:aws:iam::206417140802:role/hakes-prd-appdb-backup" # arn from module.appdb_backup_role.arn
         }
       ]
 

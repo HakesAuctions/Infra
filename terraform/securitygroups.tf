@@ -3,8 +3,11 @@ locals {
     "207.55.92.250/32",  # Henry Skrtich IP
     "71.218.118.153/32", # Alex Berger IP
     "209.197.83.205/32", # Savio Sebastian IP
-    "71.121.193.1/32",   # Mark Winsor Home IP
     "23.31.246.1/32",    # Hakes Office IP
+
+    "207.114.0.0/16",   # Mark Winsor
+    "71.121.193.92/32", # Mark Winsor
+    "71.121.193.1/32",  # Mark Winsor Home IP
   ]
 }
 

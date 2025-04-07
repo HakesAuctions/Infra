@@ -1,13 +1,13 @@
 locals {
   app_ec2 = {
     app01 = {
-      instance_type   = "t3.small" #TODO: Switch to t3.xlarge before going live
+      instance_type   = "t3.xlarge"
       ami             = local.windows_server_ami
       security_groups = [module.sg_whitelist.id]
       subnet          = module.dynamic_subnets.public_subnet_ids[0]
     },
     app02 = {
-      instance_type   = "t3.small" #TODO: Switch to t3.xlarge before going live
+      instance_type   = "t3.xlarge"
       ami             = local.windows_server_ami
       security_groups = [module.sg_whitelist.id]
       subnet          = module.dynamic_subnets.public_subnet_ids[1]
