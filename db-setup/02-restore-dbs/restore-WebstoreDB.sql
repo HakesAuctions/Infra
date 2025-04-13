@@ -3,13 +3,13 @@ USE [master];
 GO
 
 -- Delete existing db, comment if db doesnt exist
-exec msdb.dbo.rds_drop_database @db_name='NewsManagerDB';
+exec msdb.dbo.rds_drop_database @db_name='WebstoreDB';
 go
 
 -- https://aws.amazon.com/blogs/database/migrating-sql-server-to-amazon-rds-using-native-backup-and-restore/
 exec msdb.dbo.rds_restore_database
-	@restore_db_name='NewsManagerDB',
-	@s3_arn_to_restore_from='arn:aws:s3:::hakes-prd-appdb-backup/NewsManagerDB_2025-04-01.bak',
+	@restore_db_name='WebstoreDB',
+	@s3_arn_to_restore_from='arn:aws:s3:::hakes-prd-appdb-backup/webstore_2025-04-10.bak',
 	@with_norecovery=0,
     @type='FULL';
 go

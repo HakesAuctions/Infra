@@ -4,6 +4,8 @@ locals {
     "HakesAppDBReadOnly",
     "NewsManagerDBWriter",
     "NewsManagerDBReadOnly",
+    "WebstoreDBWriter",
+    "WebstoreDBReadOnly",
   ]
 }
 

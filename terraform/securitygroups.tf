@@ -5,7 +5,7 @@ locals {
     "209.197.83.205/32", # Savio Sebastian IP
     "23.31.246.1/32",    # Hakes Office IP
 
-    "207.114.0.0/16",   # Mark Winsor
+    "207.114.0.0/16",   # Mark Winsor/Diamond Comics
     "71.121.193.92/32", # Mark Winsor
     "71.121.193.1/32",  # Mark Winsor Home IP
   ]
