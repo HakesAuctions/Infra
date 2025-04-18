@@ -28,13 +28,14 @@ module "sqlserver" {
   allocated_storage = 200
   storage_encrypted = true
 
-  engine               = "sqlserver-se"
-  major_engine_version = "16.00" # SQL Server 2022
-  engine_version       = "16.00.4175.1.v1"
-  license_model        = "license-included"
+  instance_class = "db.t3.xlarge"
+  license_model  = "license-included"
 
-  instance_class     = "db.t3.xlarge"
-  db_parameter_group = "sqlserver-se-16.0"
+  engine = "sqlserver-se"
+
+  major_engine_version = "13.00" # SQL Server 2016
+  engine_version       = "13.00.6455.2.v1"
+  db_parameter_group   = "sqlserver-se-13.0"
 
   publicly_accessible = true
 
@@ -43,7 +44,7 @@ module "sqlserver" {
 
   auto_minor_version_upgrade  = true
   allow_major_version_upgrade = false
-  apply_immediately           = false
+  apply_immediately           = true
   maintenance_window          = "Sun:04:00-Sun:06:00"
   skip_final_snapshot         = false
   copy_tags_to_snapshot       = true

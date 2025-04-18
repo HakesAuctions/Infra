@@ -9,16 +9,6 @@ module "appdb_backup_s3" {
   s3_object_ownership = "BucketOwnerEnforced"
   user_enabled        = false
   versioning_enabled  = true
-
-  # privileged_principal_actions   = ["s3:GetObject", "s3:ListBucket", "s3:GetBucketLocation"]
-  # privileged_principal_arns      = [
-  #   {
-  #     (local.deployment_iam_role_arn) = [""]
-  #   },
-  #   {
-  #     (local.additional_deployment_iam_role_arn) = ["prefix1/", "prefix2/"]
-  #   }
-  # ]
 }
 
 data "aws_iam_policy_document" "appdb_backup" {
@@ -56,11 +46,6 @@ module "appdb_backup_role" {
   principals = {
     Service = ["rds.amazonaws.com"]
   }
-  # list(object({
-  #   test     = string
-  #   variable = string
-  #   values   = list(string)
-  # }))
 
   assume_role_conditions = [
     {
@@ -69,7 +54,7 @@ module "appdb_backup_role" {
       "values" = [
         module.sqlserver.instance_arn,
         "arn:aws:rds:us-east-1:${local.aws_id}:og:${module.sqlserver.option_group_id}",
-        module.appdb_backup_s3.bucket_arn
+        module.appdb_backup_s3.bucket_arn,
       ],
     },
     {
@@ -80,15 +65,6 @@ module "appdb_backup_role" {
       ],
     },
   ]
-
-  # StringEquals = {
-  #   "aws:SourceArn" = [
-  #     module.sqlserver.instance_id,
-  #     module.sqlserver.option_group_id,
-  #     module.appdb_backup_s3.bucket_arn
-  #   ]
-  #   "aws:SourceAccount" = local.aws_id
-  # }
 
   policy_documents = [
     data.aws_iam_policy_document.appdb_backup.json
