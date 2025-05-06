@@ -65,3 +65,5 @@ __pycache__/
 
 # Project Files
 *.key
+.venv
+.ansible

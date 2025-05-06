@@ -35,7 +35,7 @@ locals {
       type = "TXT"
       records = [
         # Microsoft 365 Support
-        "MS=ms77900974",
+        "MS=ms42101813",
 
         # Google Verification
         "google-site-verification=q6MCW1272pO26jA_tqDZLmPbWTv3_AYbuajvWgi-mp0",

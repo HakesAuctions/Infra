@@ -41,11 +41,14 @@ module "app_ec2" {
   root_iops        = 3000
   root_throughput  = 125
 
-  ssh_key_pair    = aws_key_pair.rsa.key_name
-  instance_type   = each.value.instance_type
-  vpc_id          = module.vpc.vpc_id
-  security_groups = each.value.security_groups
-  subnet          = each.value.subnet
+  burstable_mode = "standard" # Disable unlimited mode to limit cost
+
+  ssh_key_pair       = aws_key_pair.rsa.key_name
+  instance_type      = each.value.instance_type
+  vpc_id             = module.vpc.vpc_id
+  security_groups    = each.value.security_groups
+  subnet             = each.value.subnet
+  ipv6_address_count = 1
 
   security_group_rules = [
     {
@@ -76,6 +79,13 @@ module "app_ec2" {
   disable_api_termination = true # Instance Termination Protection
 
   associate_public_ip_address = true
+}
+
+resource "aws_iam_role_policy_attachment" "app_ec2_cw_agent" {
+  for_each = local.app_ec2
+
+  role       = module.app_ec2[each.key].role
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
 }
 
 resource "aws_route53_record" "app_ec2" {
@@ -113,16 +123,25 @@ module "backend_ec2" {
   root_iops        = 3000
   root_throughput  = 125
 
-  ssh_key_pair    = aws_key_pair.rsa.key_name
-  instance_type   = each.value.instance_type
-  vpc_id          = module.vpc.vpc_id
-  security_groups = each.value.security_groups
-  subnet          = each.value.subnet
+  burstable_mode = "standard" # Disable unlimited mode to limit cost
 
-  disable_api_stop        = true # Instance Stop Protection
+  ssh_key_pair       = aws_key_pair.rsa.key_name
+  instance_type      = each.value.instance_type
+  vpc_id             = module.vpc.vpc_id
+  security_groups    = each.value.security_groups
+  subnet             = each.value.subnet
+  ipv6_address_count = 1
+
   disable_api_termination = true # Instance Termination Protection
 
   associate_public_ip_address = true
+}
+
+resource "aws_iam_role_policy_attachment" "backend_ec2_cw_agent" {
+  for_each = local.backend_ec2
+
+  role       = module.backend_ec2[each.key].role
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
 }
 
 resource "aws_route53_record" "backend_ec2" {

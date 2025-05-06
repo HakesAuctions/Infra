@@ -11,6 +11,8 @@ module "vpc" {
   name      = "app"
 
   ipv4_primary_cidr_block = local.ipv4_cidr_block
+
+  assign_generated_ipv6_cidr_block = true
 }
 
 module "dynamic_subnets" {
@@ -28,4 +30,6 @@ module "dynamic_subnets" {
   vpc_id          = module.vpc.vpc_id
   igw_id          = [module.vpc.igw_id]
   ipv4_cidr_block = [local.ipv4_cidr_block]
+
+  ipv6_enabled = true
 }

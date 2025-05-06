@@ -28,8 +28,9 @@ module "sqlserver" {
   allocated_storage = 200
   storage_encrypted = true
 
-  instance_class = "db.t3.xlarge"
-  license_model  = "license-included"
+  instance_class = "db.m6i.xlarge"
+  #instance_class = "db.t3.xlarge" Disabled burstable instance type for performance testing
+  license_model = "license-included"
 
   engine = "sqlserver-se"
 
@@ -51,6 +52,15 @@ module "sqlserver" {
   backup_retention_period     = 7
   backup_window               = "00:00-04:00"
   deletion_protection         = true
+
+  # Enhanced Monitoring
+  monitoring_role_arn = aws_iam_role.rds_enhanced_monitoring.arn
+  # The interval, in seconds, between points when Enhanced Monitoring metrics
+  # are collected for the DB instance. To disable collecting Enhanced Monitoring
+  # metrics, specify 0. Valid Values are 0, 1, 5, 10, 15, 30, 60.
+  monitoring_interval = 60
+
+  performance_insights_enabled = true
 
   db_parameter = [
     {
@@ -82,5 +92,30 @@ module "sqlserver" {
     create = "90m"
     delete = "90m"
     update = "90m"
+  }
+}
+
+resource "aws_iam_role" "rds_enhanced_monitoring" {
+  name_prefix        = "rds-enhanced-monitoring-"
+  assume_role_policy = data.aws_iam_policy_document.rds_enhanced_monitoring.json
+}
+
+resource "aws_iam_role_policy_attachment" "rds_enhanced_monitoring" {
+  role       = aws_iam_role.rds_enhanced_monitoring.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
+}
+
+data "aws_iam_policy_document" "rds_enhanced_monitoring" {
+  statement {
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["monitoring.rds.amazonaws.com"]
+    }
   }
 }
