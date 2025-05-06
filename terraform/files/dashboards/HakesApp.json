@@ -1,0 +1,370 @@
+{
+    "widgets": [
+        {
+            "height": 6,
+            "width": 12,
+            "y": 6,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ { "expression": "FILL(METRICS(), 0)", "label": "", "id": "e1", "region": "us-east-1" } ],
+                    [ "AWS/ApplicationELB", "HTTPCode_ELB_3XX_Count", "LoadBalancer", "${alb_id}", { "region": "us-east-1", "id": "m1", "visible": false } ],
+                    [ ".", "HTTPCode_ELB_4XX_Count", ".", ".", { "region": "us-east-1", "id": "m3", "visible": false } ],
+                    [ ".", "HTTPCode_ELB_5XX_Count", ".", ".", { "region": "us-east-1", "id": "m2", "visible": false } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "period": 60,
+                "stat": "Sum",
+                "title": "LB - HTTP Status Codes",
+                "yAxis": {
+                    "left": {
+                        "label": "Count"
+                    }
+                }
+            }
+        },
+        {
+            "height": 6,
+            "width": 12,
+            "y": 0,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ { "expression": "FILL(METRICS(), 0)", "label": "", "id": "e1" } ],
+                    [ "AWS/ApplicationELB", "ProcessedBytes", "LoadBalancer", "${alb_id}", { "region": "us-east-1", "id": "m1", "visible": false } ],
+                    [ ".", "RequestCount", ".", ".", { "region": "us-east-1", "yAxis": "right", "id": "m2", "visible": false } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "title": "LB - Throughput",
+                "period": 60,
+                "stat": "Sum"
+            }
+        },
+        {
+            "height": 6,
+            "width": 12,
+            "y": 0,
+            "x": 12,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/EC2", "CPUUtilization", "InstanceId", "${app01_id}", { "region": "us-east-1" } ],
+                    [ "...", "${app02_id}", { "region": "us-east-1" } ],
+                    [ "...", "${backend01_id}", { "region": "us-east-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "title": "EC2 - CPU Utilization",
+                "period": 60,
+                "yAxis": {
+                    "left": {
+                        "min": 0,
+                        "max": 100
+                    }
+                },
+                "annotations": {
+                    "horizontal": [
+                        {
+                            "label": "Danger Zone",
+                            "value": 75,
+                            "fill": "above"
+                        }
+                    ]
+                },
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 24,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "view": "timeSeries",
+                "stacked": false,
+                "metrics": [
+                    [ "AWS/RDS", "FreeStorageSpace", "DBInstanceIdentifier", "${db_name}", { "period": 60, "region": "us-east-1" } ]
+                ],
+                "region": "us-east-1",
+                "title": "RDS - Free Storage Space",
+                "annotations": {
+                    "horizontal": [
+                        {
+                            "label": "Danger Zone",
+                            "value": 20714151936
+                        }
+                    ]
+                },
+                "period": 60
+            }
+        },
+        {
+            "height": 6,
+            "width": 12,
+            "y": 12,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/RDS", "CPUUtilization", "DBInstanceIdentifier", "${db_name}", { "region": "us-east-1", "yAxis": "right", "color": "#f89256" } ],
+                    [ ".", "DatabaseConnections", ".", ".", { "yAxis": "left", "region": "us-east-1", "color": "#08aad2", "stat": "Sum" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "period": 60,
+                "stat": "Average",
+                "annotations": {
+                    "horizontal": [
+                        {
+                            "label": "CPU - Danger Zone",
+                            "value": 75,
+                            "fill": "above",
+                            "yAxis": "right"
+                        }
+                    ]
+                },
+                "title": "RDS - CPUUtilization, DatabaseConnections",
+                "yAxis": {
+                    "left": {
+                        "min": 0,
+                        "label": "Connections"
+                    },
+                    "right": {
+                        "min": 0
+                    }
+                }
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 18,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/RDS", "ReadLatency", "DBInstanceIdentifier", "${db_name}", { "region": "us-east-1" } ],
+                    [ ".", "WriteLatency", ".", ".", { "yAxis": "left", "region": "us-east-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "yAxis": {
+                    "left": {
+                        "min": 0.01
+                    },
+                    "right": {
+                        "min": 0.01
+                    }
+                },
+                "title": "RDS - Latency",
+                "stat": "Average",
+                "period": 60
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 18,
+            "x": 6,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/RDS", "ReadIOPS", "DBInstanceIdentifier", "${db_name}", { "yAxis": "left", "region": "us-east-1", "color": "#08aad2" } ],
+                    [ ".", "WriteIOPS", ".", ".", { "region": "us-east-1", "yAxis": "left", "color": "#f89256" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "stat": "Average",
+                "period": 60,
+                "title": "RDS - IOPS",
+                "annotations": {
+                    "horizontal": [
+                        {
+                            "label": "Danger Zone",
+                            "value": 3000
+                        },
+                        {
+                            "label": "Danger Zone",
+                            "value": 3000,
+                            "yAxis": "right"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 18,
+            "x": 18,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/EC2", "CPUCreditBalance", "InstanceId", "${app01_id}", { "region": "us-east-1" } ],
+                    [ "...", "${app02_id}", { "region": "us-east-1" } ],
+                    [ "...", "${backend01_id}", { "region": "us-east-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "title": "EC2 - CPU Credit Balance",
+                "yAxis": {
+                    "left": {
+                        "min": 0
+                    }
+                },
+                "annotations": {
+                    "horizontal": [
+                        {
+                            "label": "Danger Zone",
+                            "value": 100,
+                            "fill": "below"
+                        }
+                    ]
+                },
+                "period": 60,
+                "stat": "Minimum"
+            }
+        },
+        {
+            "height": 6,
+            "width": 12,
+            "y": 6,
+            "x": 12,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "CWAgent", "Memory % Committed Bytes In Use", "InstanceId", "${app01_id}", { "region": "us-east-1" } ],
+                    [ "...", "${app02_id}", { "region": "us-east-1" } ],
+                    [ "...", "${backend01_id}", { "region": "us-east-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "yAxis": {
+                    "left": {
+                        "min": 0,
+                        "max": 100
+                    }
+                },
+                "title": "EC2 - Memory Usage %",
+                "annotations": {
+                    "horizontal": [
+                        {
+                            "label": "Danger Zone",
+                            "value": 80,
+                            "fill": "above"
+                        }
+                    ]
+                },
+                "period": 60,
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 18,
+            "x": 12,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "CWAgent", "LogicalDisk % Free Space", "InstanceId", "${app01_id}", { "region": "us-east-1" } ],
+                    [ "...", "${app02_id}", { "region": "us-east-1" } ],
+                    [ "...", "${backend01_id}", { "region": "us-east-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "title": "EC2 - Free Disk %",
+                "yAxis": {
+                    "left": {
+                        "min": 0,
+                        "max": 100
+                    }
+                },
+                "annotations": {
+                    "horizontal": [
+                        {
+                            "label": "Danger Zone",
+                            "value": 20,
+                            "fill": "below"
+                        }
+                    ]
+                },
+                "period": 60,
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 24,
+            "x": 6,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/RDS", "ReadThroughput", "DBInstanceIdentifier", "${db_name}", { "region": "us-east-1" } ],
+                    [ ".", "WriteThroughput", ".", ".", { "region": "us-east-1", "yAxis": "left" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "title": "RDS - Throughput",
+                "period": 60,
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 12,
+            "x": 12,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/EC2", "NetworkIn", "InstanceId", "${app01_id}", { "region": "us-east-1" } ],
+                    [ "...", "${app02_id}", { "region": "us-east-1" } ],
+                    [ "...", "${backend01_id}", { "region": "us-east-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "period": 60,
+                "title": "EC2 - Network In",
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 12,
+            "x": 18,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/EC2", "NetworkOut", "InstanceId", "${app01_id}", { "region": "us-east-1" } ],
+                    [ "...", "${app02_id}", { "region": "us-east-1" } ],
+                    [ "...", "${backend01_id}", { "region": "us-east-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "title": "EC2 - Network Out",
+                "period": 60,
+                "stat": "Average"
+            }
+        }
+    ]
+}

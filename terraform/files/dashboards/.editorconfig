@@ -1,0 +1,4 @@
+[*.{json,json5,releaserc}]
+# JSON files
+indent_style = space
+indent_size = 4
