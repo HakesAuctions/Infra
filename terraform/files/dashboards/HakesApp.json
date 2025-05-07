@@ -9,9 +9,9 @@
             "properties": {
                 "metrics": [
                     [ { "expression": "FILL(METRICS(), 0)", "label": "", "id": "e1", "region": "us-east-1" } ],
-                    [ "AWS/ApplicationELB", "HTTPCode_ELB_3XX_Count", "LoadBalancer", "${alb_id}", { "region": "us-east-1", "id": "m1", "visible": false } ],
-                    [ ".", "HTTPCode_ELB_4XX_Count", ".", ".", { "region": "us-east-1", "id": "m3", "visible": false } ],
-                    [ ".", "HTTPCode_ELB_5XX_Count", ".", ".", { "region": "us-east-1", "id": "m2", "visible": false } ]
+                    [ "AWS/ApplicationELB", "HTTPCode_Target_3XX_Count", "LoadBalancer", "${alb_id}", { "region": "us-east-1", "id": "m1", "visible": false } ],
+                    [ ".", "HTTPCode_Target_4XX_Count", ".", ".", { "region": "us-east-1", "id": "m3", "visible": false } ],
+                    [ ".", "HTTPCode_Target_5XX_Count", ".", ".", { "region": "us-east-1", "id": "m2", "visible": false } ]
                 ],
                 "view": "timeSeries",
                 "stacked": false,
@@ -34,7 +34,8 @@
             "type": "metric",
             "properties": {
                 "metrics": [
-                    [ { "expression": "FILL(METRICS(), 0)", "label": "", "id": "e1" } ],
+                    [ { "expression": "FILL(m1, 0)", "label": "ProcessedBytes", "id": "e1", "region": "us-east-1" } ],
+                    [ { "expression": "FILL(m2, 0)", "label": "RequestCount", "id": "e2", "yAxis": "right" } ],
                     [ "AWS/ApplicationELB", "ProcessedBytes", "LoadBalancer", "${alb_id}", { "region": "us-east-1", "id": "m1", "visible": false } ],
                     [ ".", "RequestCount", ".", ".", { "region": "us-east-1", "yAxis": "right", "id": "m2", "visible": false } ]
                 ],
@@ -84,7 +85,7 @@
         {
             "height": 6,
             "width": 6,
-            "y": 24,
+            "y": 30,
             "x": 0,
             "type": "metric",
             "properties": {
@@ -114,8 +115,7 @@
             "type": "metric",
             "properties": {
                 "metrics": [
-                    [ "AWS/RDS", "CPUUtilization", "DBInstanceIdentifier", "${db_name}", { "region": "us-east-1", "yAxis": "right", "color": "#f89256" } ],
-                    [ ".", "DatabaseConnections", ".", ".", { "yAxis": "left", "region": "us-east-1", "color": "#08aad2", "stat": "Sum" } ]
+                    [ "AWS/RDS", "CPUUtilization", "DBInstanceIdentifier", "${db_name}", { "region": "us-east-1", "yAxis": "left", "color": "#08aad2" } ]
                 ],
                 "view": "timeSeries",
                 "stacked": false,
@@ -127,19 +127,16 @@
                         {
                             "label": "CPU - Danger Zone",
                             "value": 75,
-                            "fill": "above",
-                            "yAxis": "right"
+                            "fill": "above"
                         }
                     ]
                 },
-                "title": "RDS - CPUUtilization, DatabaseConnections",
+                "title": "RDS - CPU Utilization %",
                 "yAxis": {
                     "left": {
                         "min": 0,
-                        "label": "Connections"
-                    },
-                    "right": {
-                        "min": 0
+                        "label": "Connections",
+                        "max": 100
                     }
                 }
             }
@@ -147,7 +144,7 @@
         {
             "height": 6,
             "width": 6,
-            "y": 18,
+            "y": 24,
             "x": 0,
             "type": "metric",
             "properties": {
@@ -174,7 +171,7 @@
         {
             "height": 6,
             "width": 6,
-            "y": 18,
+            "y": 24,
             "x": 6,
             "type": "metric",
             "properties": {
@@ -310,7 +307,7 @@
         {
             "height": 6,
             "width": 6,
-            "y": 24,
+            "y": 30,
             "x": 6,
             "type": "metric",
             "properties": {
@@ -364,6 +361,30 @@
                 "title": "EC2 - Network Out",
                 "period": 60,
                 "stat": "Average"
+            }
+        },
+        {
+            "height": 6,
+            "width": 12,
+            "y": 18,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/RDS", "DatabaseConnections", "DBInstanceIdentifier", "${db_name}", { "yAxis": "left", "region": "us-east-1", "color": "#08aad2" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "period": 60,
+                "stat": "Sum",
+                "title": "RDS - DatabaseConnections",
+                "yAxis": {
+                    "left": {
+                        "label": "",
+                        "min": 0
+                    }
+                }
             }
         }
     ]

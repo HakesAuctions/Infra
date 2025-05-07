@@ -8,7 +8,7 @@ from locust import FastHttpUser
 from common.auth import login
 
 class Bidders(FastHttpUser):
-    weight = 5  # More users of this type
+    weight = 6  # More users of this type
     host = "https://app.hakes.com"
     default_headers = {
         "accept-encoding": "gzip, deflate, br, zstd",
@@ -26,16 +26,16 @@ class Bidders(FastHttpUser):
         """Log in before executing tasks."""
         login(self.client)
 
-    @task
+    @task(2)
     def view_homepage(self):
         self.client.get("/")
 
-    @task
+    @task(1)
     def view_mybids(self):
         self.client.get("/Account")  # View account page
         self.client.get("/Account/Bids")  # View bids page
 
-    @task
+    @task(2)
     def browse_auctions(self):
         # View browse auction
         self.client.get("/Auction/BrowseAuction")
@@ -43,29 +43,30 @@ class Bidders(FastHttpUser):
         # View all auction items
         self.client.get("/Auction/CategoryItemList")
 
-    @task
+    @task(2)
     def view_meetthestaff(self):
         self.client.get("/Article/1250/198076")  # Meet The Staff
 
-    @task
+    @task(2)
     def view_howtoconsign(self):
         self.client.get("/Article/1250/154747/How-To-Consign")  # How To Consign
 
-    @task
+    @task(2)
     def view_hakesstory(self):
         self.client.get("/Article/1250/196530/Hake's%20Americana%20and%20Collectibles%20Turns%2050'")  # Hake's Story
 
-    @task
+    @task(2)
     def view_auctionclosingproceduref(self):
         self.client.get("/Article/1250/154748/Auction-Closing-Procedures")  # Auction Closing Procedure
 
-    @task
+    @task(2)
     def view_mybids(self):
         self.client.get("/Account/Bids")  # My Bids
 
         # Set the Content-Type header for the POST request
         headers = {
             "Content-Type": "application/json",  # Set the desired Content-Type
+            "Content-Length": 0, # For some reason, this is required
         }
 
         # Call this a ton to mimic the load from a real user
@@ -77,7 +78,7 @@ class Bidders(FastHttpUser):
             )
             time.sleep(1)  # Add a 1-second delay between requests
 
-    @task
+    @task(2)
     def view_accountdetails(self):
         self.client.get("/Account/Detail")  # Account Details
 

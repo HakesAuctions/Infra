@@ -28,8 +28,8 @@ module "sqlserver" {
   allocated_storage = 200
   storage_encrypted = true
 
-  instance_class = "db.m6i.xlarge"
-  #instance_class = "db.t3.xlarge" Disabled burstable instance type for performance testing
+  instance_class = "db.t3.xlarge"
+  #instance_class = "db.t3.2xlarge"
   license_model = "license-included"
 
   engine = "sqlserver-se"
