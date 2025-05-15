@@ -4,11 +4,13 @@ locals {
       name    = ""
       type    = "A"
       records = ["207.114.32.28"]
+      ttl     = 60
     },
     "www" = {
       name    = "www"
       type    = "A"
       records = ["207.114.32.28"]
+      ttl     = 60
     },
     "mx" = {
       name    = ""
@@ -174,6 +176,6 @@ resource "aws_route53_record" "this" {
   zone_id = aws_route53_zone.hakes_com.zone_id
   name    = each.value.name
   type    = each.value.type
-  ttl     = 300
+  ttl     = lookup(each.value, "ttl", 300) # Default to 300
   records = each.value.records
 }

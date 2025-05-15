@@ -28,9 +28,8 @@ module "sqlserver" {
   allocated_storage = 200
   storage_encrypted = true
 
-  instance_class = "db.t3.xlarge"
-  #instance_class = "db.t3.2xlarge"
-  license_model = "license-included"
+  instance_class = "db.t3.2xlarge" # Hope to scale down the db
+  license_model  = "license-included"
 
   engine = "sqlserver-se"
 
