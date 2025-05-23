@@ -1,17 +1,18 @@
 locals {
   dns_records = {
-    "_base_a" = {
-      name    = ""
-      type    = "A"
-      records = ["207.114.32.28"]
-      ttl     = 60
-    },
-    "www" = {
-      name    = "www"
-      type    = "A"
-      records = ["207.114.32.28"]
-      ttl     = 60
-    },
+    # Old website, remove when cutover is done
+    # "_base_a" = {
+    #   name    = ""
+    #   type    = "A"
+    #   records = ["207.114.32.28"]
+    #   ttl     = 60
+    # },
+    # "www" = {
+    #   name    = "www"
+    #   type    = "A"
+    #   records = ["207.114.32.28"]
+    #   ttl     = 60
+    # },
     "mx" = {
       name    = ""
       type    = "MX"

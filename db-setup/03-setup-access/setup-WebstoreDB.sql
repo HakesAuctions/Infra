@@ -12,14 +12,14 @@ ALTER ROLE db_ddladmin ADD MEMBER WebstoreDBWriter;
 ALTER ROLE db_datareader ADD MEMBER WebstoreDBReadOnly;
 GO
 
--- Grant EXECUTE permissions
-GRANT EXECUTE TO [HakesAppDBWriter];
-GO
-
 -- Grant HakesAppDB access to WebstoreDBWriter
 USE HakesAppDB;
 GO
 CREATE USER WebstoreDBWriter FOR LOGIN WebstoreDBWriter;
 GO
 ALTER ROLE db_datareader ADD MEMBER WebstoreDBWriter;
+GO
+
+-- Grant EXECUTE permissions
+GRANT EXECUTE TO [HakesAppDBWriter];
 GO

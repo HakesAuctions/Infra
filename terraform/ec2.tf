@@ -71,7 +71,7 @@ module "app_ec2" {
       "to_port" : 80,
       "protocol" : "tcp",
 
-      "source_security_group_id" : module.alb.security_group_id
+      "source_security_group_id" : module.sg_loadbalancer.id #module.alb.security_group_id
     },
   ]
 

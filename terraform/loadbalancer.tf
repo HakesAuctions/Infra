@@ -6,63 +6,39 @@ module "alb" {
   stage     = terraform.workspace
   name      = "app"
 
-  vpc_id             = module.vpc.vpc_id
-  security_group_ids = [module.sg_loadbalancer.id]
-  subnet_ids         = module.dynamic_subnets.public_subnet_ids
-  internal           = false
-  http_enabled       = true
-  http_redirect      = true
-  https_enabled      = true
-  http2_enabled      = true
-  idle_timeout       = 60
-  ip_address_type    = "ipv4"
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.dynamic_subnets.public_subnet_ids
+
+  security_group_enabled = false # Disable default SG so we can control who has access via LB
+  security_group_ids     = [module.sg_loadbalancer.id]
+
+  internal        = false
+  http_enabled    = true
+  http_redirect   = true
+  https_enabled   = true
+  http2_enabled   = true
+  idle_timeout    = 60
+  ip_address_type = "ipv4"
 
   certificate_arn = module.cert_hakes_com.arn
 
   cross_zone_load_balancing_enabled = true
   deletion_protection_enabled       = true
 
-  # access_logs_enabled              = var.access_logs_enabled
-  # deregistration_delay             = var.deregistration_delay
-  # health_check_path                = var.health_check_path
-  # health_check_timeout             = var.health_check_timeout
-  # health_check_healthy_threshold   = var.health_check_healthy_threshold
-  # health_check_unhealthy_threshold = var.health_check_unhealthy_threshold
-  # health_check_interval            = var.health_check_interval
-  # health_check_matcher             = var.health_check_matcher
-
   target_group_port        = 80
   target_group_target_type = "instance"
+
+  # Redirect to maintenance page, uncomment and apply to enable
+  # listener_https_redirect = {
+  #   port        = "443"
+  #   protocol    = "HTTPS"
+  #   status_code = "HTTP_302" # temporary redirect
+  #   host        = module.maintenance_page.aliases[0]
+  # }
 
   stickiness = {
     cookie_duration = 60 * 20 # 20 Mintues
     enabled         = true
-  }
-}
-
-resource "aws_route53_record" "base" {
-  zone_id = aws_route53_zone.hakes_com.zone_id
-  name    = "app" #TODO: Replace with base domain before going live
-  type    = "A"
-
-  alias {
-    name    = module.alb.alb_dns_name
-    zone_id = module.alb.alb_zone_id
-
-    evaluate_target_health = true
-  }
-}
-
-resource "aws_route53_record" "www" {
-  zone_id = aws_route53_zone.hakes_com.zone_id
-  name    = "www-app" #TODO: Remove -app before going live
-  type    = "A"
-
-  alias {
-    name    = module.alb.alb_dns_name
-    zone_id = module.alb.alb_zone_id
-
-    evaluate_target_health = true
   }
 }
 

@@ -17,7 +17,6 @@ module "sqlserver" {
   ca_cert_identifier  = "rds-ca-rsa2048-g1"
   allowed_cidr_blocks = local.whitelist_cidrs
 
-  #database_name = "app"
   database_user = "admin"
 
   database_manage_master_user_password = true

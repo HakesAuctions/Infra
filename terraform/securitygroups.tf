@@ -104,7 +104,7 @@ module "sg_loadbalancer" {
       from_port   = 80
       to_port     = 80
       protocol    = "tcp"
-      cidr_blocks = local.whitelist_cidrs # ["0.0.0.0/0"] #TODO: Switch to allow all access before going live
+      cidr_blocks = ["0.0.0.0/0"]
       description = "Allow HTTP from anywhere"
     },
     {
@@ -113,7 +113,7 @@ module "sg_loadbalancer" {
       from_port   = 443
       to_port     = 443
       protocol    = "tcp"
-      cidr_blocks = local.whitelist_cidrs # ["0.0.0.0/0"] #TODO: Switch to allow all access before going live
+      cidr_blocks = ["0.0.0.0/0"]
       description = "Allow HTTPS from anywhere"
     }
   ]
