@@ -100,6 +100,21 @@ locals {
       type    = "CNAME"
       records = ["sendgrid.net"]
     },
+    "sendgrid_7" = {
+      name    = "em6933.www.hakes.com"
+      type    = "CNAME"
+      records = ["u53038784.wl035.sendgrid.net"]
+    },
+    "sendgrid_8" = {
+      name    = "s1._domainkey.www.hakes.com"
+      type    = "CNAME"
+      records = ["s1.domainkey.u53038784.wl035.sendgrid.net"]
+    },
+    "sendgrid_9" = {
+      name    = "s2._domainkey.www.hakes.com"
+      type    = "CNAME"
+      records = ["s2.domainkey.u53038784.wl035.sendgrid.net"]
+    },
     ###
 
     ### aWeber email CNAME
