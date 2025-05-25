@@ -1,22 +1,9 @@
 locals {
   dns_records = {
-    # Old website, remove when cutover is done
-    # "_base_a" = {
-    #   name    = ""
-    #   type    = "A"
-    #   records = ["207.114.32.28"]
-    #   ttl     = 60
-    # },
-    # "www" = {
-    #   name    = "www"
-    #   type    = "A"
-    #   records = ["207.114.32.28"]
-    #   ttl     = 60
-    # },
     "mx" = {
       name    = ""
       type    = "MX"
-      records = ["0 hakes-com.mail.protection.outlook.com."]
+      records = ["10 hakes-com.mail.protection.outlook.com."]
     },
     "emailer" = {
       name    = "emailer"
@@ -82,21 +69,36 @@ locals {
       records = ["C7971662B49F45088A64082CAD9A2C2D.189F84997D9058E2B7F83113ABA9FE3F.5daf3c42d7926.comodoca.com."]
     },
 
-    ### Sendgrid CNAME
+    ### Sendgrid
     "sendgrid_1" = {
-      name    = "em1"
-      type    = "CNAME"
-      records = ["u3017607.wl108.sendgrid.net."]
+      name    = "em3548.www.hakes.com"
+      type    = "MX"
+      records = ["10 mx.sendgrid.net."]
     },
     "sendgrid_2" = {
-      name    = "s1._domainkey"
-      type    = "CNAME"
-      records = ["s1.domainkey.u3017607.wl108.sendgrid.net."]
+      name    = "em3548.www.hakes.com"
+      type    = "TXT"
+      records = ["v=spf1 include:sendgrid.net ~all"]
     },
     "sendgrid_3" = {
-      name    = "s2._domainkey"
+      name    = "m1._domainkey.www.hakes.com"
+      type    = "TXT"
+      records = ["k=rsa; t=s; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDY2fzz6lQ4tFKuDC8zdUkH31NB6GQa+JeuUVdlqSvY3Vzveu0YEs951CkSSBzzA4MEsKYAeO9C5C93CDlzJD4se5OkBnwlUAYQ3D4kI+V6+6WzKFuZi+6lH2upEt0e/5+n3yAVF77yCKE/kghm+EkESVJFp7ef0E3xwrAIV1uB1wIDAQAB"]
+    },
+    "sendgrid_4" = {
+      name    = "_dmarc.www.hakes.com"
+      type    = "TXT"
+      records = ["v=DMARC1; p=none; pct=100; rua=mailto:dmarc@fbl.optin.com"]
+    },
+    "sendgrid_5" = {
+      name    = "url6390.www.hakes.com"
       type    = "CNAME"
-      records = ["s2.domainkey.u3017607.wl108.sendgrid.net."]
+      records = ["sendgrid.net"]
+    },
+    "sendgrid_6" = {
+      name    = "53038784.www.hakes.com"
+      type    = "CNAME"
+      records = ["sendgrid.net"]
     },
     ###
 
