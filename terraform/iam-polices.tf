@@ -40,7 +40,35 @@ resource "aws_iam_policy" "cost_explorer_readonly" {
   })
 }
 
-resource "aws_iam_group_policy_attachment" "cost_explorer_readonly" {
+resource "aws_iam_group_policy_attachment" "billing_cost_explorer_readonly" {
   group      = module.groups["billing"].name
   policy_arn = aws_iam_policy.cost_explorer_readonly.arn
+}
+
+resource "aws_iam_group_policy_attachment" "support_cost_explorer_readonly" {
+  group      = module.groups["support"].name
+  policy_arn = aws_iam_policy.cost_explorer_readonly.arn
+}
+
+resource "aws_iam_policy" "secrets_manager_readonly" {
+  name        = "SecretsManagerReadOnly"
+  description = "Allows read only access to Secrets Manager"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "secretsmanager:Get*",
+          "secretsmanager:List*"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_group_policy_attachment" "support_secrets_manager_readonly" {
+  group      = module.groups["support"].name
+  policy_arn = aws_iam_policy.secrets_manager_readonly.arn
 }

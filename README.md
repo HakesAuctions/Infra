@@ -45,7 +45,15 @@ This repo holds the IaC for Hakes aws account (206417140802)
 * Region Use Limit (disabled)
 * Block disabling s3 public access (disabled)
 
-## Alerts
+## Alarms
 * ec2 (TODO)
+  * cpu usage
+  * memory usage
+  * disk usage
+  * credit balance
 * rds (TODO)
+  * cpu usage
+  * disk usage
+  * credit balance
+  * disk queue depth
 * billing (TODO)

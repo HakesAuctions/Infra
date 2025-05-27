@@ -1,11 +1,11 @@
 locals {
   file_map = {
     "index.html" = {
-      source       = "./maintenance-page/index.html"
+      source       = "./files/maintenance-page/index.html"
       content_type = "text/html"
     }
     "HakesLogo.png" = {
-      source       = "./maintenance-page/HakesLogo.png"
+      source       = "./files/maintenance-page/HakesLogo.png"
       content_type = "image/png"
     }
   }

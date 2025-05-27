@@ -1,24 +1,28 @@
 locals {
   users = {
     henry-skrtich = {
-      name   = "hskrtich@soaringtech.com",
+      email  = "hskrtich@soaringtech.com",
       groups = ["admin"],
+      alarms = true,
     },
     alex-berger = {
-      name   = "aberger@soaringtech.com",
+      email  = "aberger@soaringtech.com",
       groups = ["admin"],
+      alarms = false,
     },
     justin-davis = {
-      name   = "justin@soaringtech.com",
+      email  = "justin@soaringtech.com",
       groups = ["admin"],
+      alarms = true,
     },
     shawn-sippel = {
-      name = "sshawn@geppifamilyenterprises.com",
+      email = "sshawn@geppifamilyenterprises.com",
       groups = [
         "support",
         "billing",
         "readonly",
       ],
+      alarms = true,
     }
   }
 }
@@ -28,6 +32,6 @@ module "users" {
 
   for_each = local.users
 
-  name   = each.value.name
+  name   = each.value.email
   groups = each.value.groups
 }

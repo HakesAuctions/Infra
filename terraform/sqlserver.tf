@@ -21,11 +21,12 @@ module "sqlserver" {
 
   database_manage_master_user_password = true
 
-  database_port     = 1433
-  multi_az          = true
-  storage_type      = "gp3"
-  allocated_storage = 200
-  storage_encrypted = true
+  database_port         = 1433
+  multi_az              = true
+  storage_type          = "gp3"
+  allocated_storage     = 200
+  max_allocated_storage = 500
+  storage_encrypted     = true
 
   instance_class = "db.t3.2xlarge" # Hope to scale down the db
   license_model  = "license-included"

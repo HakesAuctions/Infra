@@ -16,7 +16,7 @@ locals {
 
   backend_ec2 = {
     backend01 = {
-      instance_type   = "t3.small"
+      instance_type   = "t3a.medium"
       ami             = local.windows_server_ami
       security_groups = [module.sg_whitelist.id]
       subnet          = module.dynamic_subnets.public_subnet_ids[0]
