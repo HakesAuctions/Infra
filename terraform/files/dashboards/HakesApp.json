@@ -16,7 +16,7 @@
                 "view": "timeSeries",
                 "stacked": false,
                 "region": "us-east-1",
-                "period": 60,
+                "period": 300,
                 "stat": "Sum",
                 "title": "LB - HTTP Status Codes",
                 "yAxis": {
@@ -34,8 +34,8 @@
             "type": "metric",
             "properties": {
                 "metrics": [
-                    [ { "expression": "FILL(m1, 0)", "label": "ProcessedBytes", "id": "e1", "region": "us-east-1" } ],
-                    [ { "expression": "FILL(m2, 0)", "label": "RequestCount", "id": "e2", "yAxis": "right" } ],
+                    [ { "expression": "FILL(m1, 0)", "label": "ProcessedBytes", "id": "e1", "period": 300, "region": "us-east-1" } ],
+                    [ { "expression": "FILL(m2, 0)", "label": "RequestCount", "id": "e2", "period": 300, "yAxis": "right", "region": "us-east-1" } ],
                     [ "AWS/ApplicationELB", "ProcessedBytes", "LoadBalancer", "${alb_id}", { "region": "us-east-1", "id": "m1", "visible": false } ],
                     [ ".", "RequestCount", ".", ".", { "region": "us-east-1", "yAxis": "right", "id": "m2", "visible": false } ]
                 ],
@@ -43,7 +43,7 @@
                 "stacked": false,
                 "region": "us-east-1",
                 "title": "LB - Throughput",
-                "period": 60,
+                "period": 300,
                 "stat": "Sum"
             }
         },

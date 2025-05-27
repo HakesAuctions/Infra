@@ -20,13 +20,6 @@ locals {
         "readonly",
       ],
     }
-    savio-sebastian = {
-      name = "ssavio@diamondcomics.com",
-      groups = [
-        "support",
-        "readonly",
-      ],
-    },
   }
 }
 

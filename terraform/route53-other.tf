@@ -34,7 +34,7 @@ locals {
         "knowbe4-site-verification=4a20325f993d226467366bab06c122e3",
 
         # SPF Record
-        "v=spf1 ip4:207.114.32.0/24 ip4:207.114.33.0/24 include:spf.protection.outlook.com include:send.aweber.com ~all",
+        "v=spf1 include:sendgrid.net include:spf.protection.outlook.com include:send.aweber.com ~all",
       ]
     },
     "domainkey" = { # DomainKey policy for hakes.com
@@ -70,16 +70,6 @@ locals {
     },
 
     ### Sendgrid
-    "sendgrid_1" = {
-      name    = "em3548.www.hakes.com"
-      type    = "MX"
-      records = ["10 mx.sendgrid.net."]
-    },
-    "sendgrid_2" = {
-      name    = "em3548.www.hakes.com"
-      type    = "TXT"
-      records = ["v=spf1 include:sendgrid.net ~all"]
-    },
     "sendgrid_3" = {
       name    = "m1._domainkey.www.hakes.com"
       type    = "TXT"
@@ -101,7 +91,7 @@ locals {
       records = ["sendgrid.net"]
     },
     "sendgrid_7" = {
-      name    = "em6933.www.hakes.com"
+      name    = "em6224.www.hakes.com"
       type    = "CNAME"
       records = ["u53038784.wl035.sendgrid.net"]
     },

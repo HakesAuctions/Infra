@@ -12,7 +12,9 @@ This repo holds the IaC for Hakes aws account (206417140802)
 * readonly
 
 ## Managed Polices
-* IAM MFA (TODO)
+* IAM MFA
+* ec2_start_stop_reboot
+* cost_explorer_readonly
 
 ## Load Balancer
 * main load balancer
