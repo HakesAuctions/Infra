@@ -6,6 +6,7 @@ locals {
     "NewsManagerDBReadOnly",
     "WebstoreDBWriter",
     "WebstoreDBReadOnly",
+    "HakesAppDBHakesItemService",
   ]
 }
 

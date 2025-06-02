@@ -13,3 +13,11 @@ variable "alarm_actions" {
 variable "ok_actions" {
   type = list(string)
 }
+
+variable "period" {
+  type = number
+}
+
+variable "evaluations" {
+  type = number
+}

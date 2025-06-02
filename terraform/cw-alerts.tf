@@ -1,5 +1,8 @@
 locals {
   billing_threshold = 3500 #USD
+
+  std_period      = 60
+  std_evaluations = 15
 }
 
 # Email subscriptions to the alarms is a manual process
@@ -29,6 +32,9 @@ module "app_ec2_alarms" {
   namespace = local.namespace
   stage     = terraform.workspace
 
+  period      = local.std_period
+  evaluations = local.std_evaluations
+
   instance_id   = module.app_ec2[each.key].id
   alarm_actions = [module.sns_alarms.sns_topic_arn]
   ok_actions    = []
@@ -43,6 +49,9 @@ module "backend_ec2_alarms" {
   namespace = local.namespace
   stage     = terraform.workspace
 
+  period      = local.std_period
+  evaluations = local.std_evaluations
+
   instance_id   = module.backend_ec2[each.key].id
   alarm_actions = [module.sns_alarms.sns_topic_arn]
   ok_actions    = []
@@ -51,9 +60,10 @@ module "backend_ec2_alarms" {
 module "rds_alarms" {
   source = "./modules/cw-alarms-rds"
 
-  name      = module.sqlserver.instance_id
-  namespace = local.namespace
-  stage     = terraform.workspace
+  name = module.sqlserver.instance_id
+
+  period      = local.std_period
+  evaluations = local.std_evaluations
 
   instance_id   = module.sqlserver.instance_id
   alarm_actions = [module.sns_alarms.sns_topic_arn]
