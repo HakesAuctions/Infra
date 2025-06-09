@@ -3,27 +3,28 @@ locals {
     henry-skrtich = {
       email  = "hskrtich@soaringtech.com",
       groups = ["admin"],
-      alarms = true,
     },
     alex-berger = {
       email  = "aberger@soaringtech.com",
       groups = ["admin"],
-      alarms = false,
     },
     justin-davis = {
       email  = "justin@soaringtech.com",
       groups = ["admin"],
-      alarms = true,
     },
     shawn-sippel = {
       email = "sshawn@geppifamilyenterprises.com",
       groups = [
         "support",
-        "billing",
         "readonly",
       ],
-      alarms = true,
-    }
+    },
+    alex-winter = {
+      email = "walex@hakes.com",
+      groups = [
+        "billing",
+      ],
+    },
   }
 }
 
