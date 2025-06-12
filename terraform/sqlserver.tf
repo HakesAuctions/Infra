@@ -45,11 +45,11 @@ module "sqlserver" {
   auto_minor_version_upgrade  = true
   allow_major_version_upgrade = false
   apply_immediately           = true
-  maintenance_window          = "Sun:04:00-Sun:06:00"
+  maintenance_window          = "Sun:06:00-Sun:08:00" #UTC
   skip_final_snapshot         = false
   copy_tags_to_snapshot       = true
-  backup_retention_period     = 7
-  backup_window               = "00:00-04:00"
+  backup_retention_period     = 30
+  backup_window               = "08:00-10:00" #UTC
   deletion_protection         = true
 
   # Enhanced Monitoring

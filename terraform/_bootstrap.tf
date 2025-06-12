@@ -11,16 +11,16 @@ terraform {
 
   required_providers {
     aws = {
-      version = "~> 5.0"
+      version = "~> 5.99"
       source  = "hashicorp/aws"
     }
   }
 
   backend "s3" {
+    profile = "hakes-admin"
     region  = "us-east-1"
     bucket  = "hakes-prd-terraform-state"
     key     = "terraform.tfstate"
-    profile = "hakes-admin"
     encrypt = "true"
 
     dynamodb_table = "hakes-prd-terraform-state-lock"

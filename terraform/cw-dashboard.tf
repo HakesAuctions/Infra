@@ -8,4 +8,8 @@ resource "aws_cloudwatch_dashboard" "main" {
     backend01_id = module.backend_ec2["backend01"].id
     db_name      = module.sqlserver.instance_id
   })
+
+  lifecycle {
+    ignore_changes = [dashboard_body]
+  }
 }

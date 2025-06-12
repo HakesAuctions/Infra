@@ -6,7 +6,7 @@ locals {
   default_aws_tags = {
     Environment = terraform.workspace
     ManagedBy   = "terraform"
-    Repo        = "https://github.com/HakesAuctions/Infra/_tfstate-backend"
+    Repository  = "https://github.com/HakesAuctions/Infra/_tfstate-backend"
   }
 }
 
@@ -21,10 +21,10 @@ terraform {
   }
 
   backend "s3" {
+    profile = "hakes-admin"
     region  = "us-east-1"
     bucket  = "hakes-prd-terraform-state"
     key     = "tfstate-backend.tfstate"
-    profile = "hakes-admin"
     encrypt = "true"
 
     dynamodb_table = "hakes-prd-terraform-state-lock"
