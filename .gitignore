@@ -55,7 +55,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Terraform Files
+# OpenTofu/Terraform Files
 **/.terraform/*
 *.tfstate
 *.tfstate.*

@@ -67,7 +67,7 @@ indent_style = space
 indent_size = 2
 
 # To make Prettier happy - https://prettier.io/
-max_line_length = 80
+max_line_length = 100
 
 [*.hbs]
 # Handlebar.js file
@@ -86,7 +86,7 @@ indent_style = space
 indent_size = 4
 
 [*.go]
-# GoLang files use tabs
+# Golang files
 indent_style = tab
 
 [*.{json,json5,releaserc}]
@@ -99,16 +99,16 @@ indent_size = 2
 indent_style = tab
 indent_size = 4
 
+[*.mk]
+# Makefiles need tabs in order to work properly
+indent_style = tab
+indent_size = 4
+
 [*.{md,markdown}]
 # To create a line break (<br/>) in markdown, end a line with two or more spaces
 # and then type return; thus, don't trim whitespace from the end of lines in
 # markdown files
 trim_trailing_whitespace = false
-
-[*.mk]
-# Makefiles need tabs in order to work properly
-indent_style = tab
-indent_size = 4
 
 [package.json]
 indent_style = space
@@ -118,8 +118,8 @@ indent_size = 2
 indent_style = space
 indent_size = 2
 
-[*.{tf,tfvars}]
-# Terraform Files
+[*.{hcl,tf,tfvars}]
+# HCL/OpenTofu/Terraform Files
 indent_style = space
 indent_size = 2
 

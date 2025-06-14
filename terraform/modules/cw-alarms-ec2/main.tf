@@ -71,7 +71,7 @@ resource "aws_cloudwatch_metric_alarm" "ec2_memory_high" {
 resource "aws_cloudwatch_metric_alarm" "ec2_disk_low" {
   alarm_name = "EC2 ${local.name} - Low Disk Space"
 
-  alarm_description = "EC2 free disk space is under 10%" #TODO convert this to percent
+  alarm_description = "EC2 free disk space is under 10%"
 
   comparison_operator = "LessThanThreshold"
   period              = var.period

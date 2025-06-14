@@ -46,14 +46,14 @@ This repo holds the IaC for Hakes aws account (206417140802)
 * Block disabling s3 public access (disabled)
 
 ## Alarms
-* ec2 (TODO)
+* ec2
   * cpu usage
   * memory usage
   * disk usage
   * credit balance
-* rds (TODO)
+* rds
   * cpu usage
   * disk usage
   * credit balance
   * disk queue depth
-* billing (TODO)
+* billing
