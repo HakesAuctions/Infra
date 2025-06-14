@@ -53,7 +53,7 @@ module "appdb_backup_role" {
       "variable" = "aws:SourceArn",
       "values" = [
         module.sqlserver.instance_arn,
-        "arn:aws:rds:us-east-1:${local.aws_id}:og:${module.sqlserver.option_group_id}",
+        "arn:aws:rds:us-east-1:${local.account_id}:og:${module.sqlserver.option_group_id}",
         module.appdb_backup_s3.bucket_arn,
       ],
     },
@@ -61,7 +61,7 @@ module "appdb_backup_role" {
       "test"     = "StringEquals",
       "variable" = "aws:SourceAccount",
       "values" = [
-        local.aws_id
+        local.account_id
       ],
     },
   ]

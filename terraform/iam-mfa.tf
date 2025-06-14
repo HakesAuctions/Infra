@@ -3,7 +3,7 @@ module "enforce_mfa" {
   version = "~> 1.0"
 
   policy_name = "managed-mfa-enforce"
-  account_id  = data.aws_caller_identity.current.id
+  account_id  = local.account_id
   groups      = [for g in module.groups : g.name]
 
   manage_own_signing_certificates = true

@@ -4,6 +4,9 @@ locals {
     ManagedBy   = "terraform"
     Repo        = "https://github.com/HakesAuctions/Infra/terraform"
   }
+
+  account_id = "206417140802"
+  namespace  = "hakes"
 }
 
 terraform {
@@ -36,5 +39,3 @@ provider "aws" {
 
 # tflint-ignore: terraform_unused_declarations
 data "aws_region" "current" {}
-# tflint-ignore: terraform_unused_declarations
-data "aws_caller_identity" "current" {}
